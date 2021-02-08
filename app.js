@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 
-const ConnectDB = require("./database/db");
+const ConnectDB = require("./database/database.connection");
 
 const postsRoutes = require("./routes/posts");
 const userRoutes = require("./routes/user");
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/images", express.static(path.join("backend/images")));
 
-ConnectDB()
+ConnectDB();
 
 
 app.use((req, res, next) => {
@@ -33,6 +33,12 @@ app.use((req, res, next) => {
 
 app.use("/api/posts", postsRoutes);
 app.use("/api/user", userRoutes);
+
+
+
+app.get('/', (req, res) => {
+  return res.send(`Server is Up and running!!!`);
+});
 
 module.exports = app;
 

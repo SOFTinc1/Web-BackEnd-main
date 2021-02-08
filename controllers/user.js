@@ -2,6 +2,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
+const { SERVER_SECRET_KEY } = require("../configuration/configuration");
+
 
 exports.createUser = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
@@ -49,7 +51,7 @@ exports.userLogin = (req, res, next) => {
       }
       const token = jwt.sign(
         { email: fetchedUser.email, userName: fetchedUser.fullname, phone: fetchedUser.phone, image: fetchedUser.image, userId: fetchedUser._id },
-        "secret_this_should_be_longer",
+        SERVER_SECRET_KEY,
         { expiresIn: "1h" }
       );
       res.status(200).json({

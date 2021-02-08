@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-
-const DB_URL = "mongodb+srv://aang:Sbjjw84MKDycWwva@cluster0.hrf19.mongodb.net/angular-blog-app?retryWrites=true&w=majority";
+const { DB_URL } = require("../configuration/configuration");
 
 const connectionOptions = {
     useNewUrlParser: true,
